@@ -1,4 +1,7 @@
 spring:
+  sql:
+    init:
+      enabled: true
   application:
     name: movie-resource
   datasource:
@@ -9,4 +12,4 @@ logging:
     "[com.netflix.discovery]": OFF
 
 server:
-  port: 0
+  port: 8781
