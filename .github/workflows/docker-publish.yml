@@ -28,12 +28,6 @@ jobs:
       - name: Build with maven
         run: mvn spring-boot:build-image
         
-  publish:
-    needs: build
-    
-    runs-on: ubuntu-latest
-    
-    steps:
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
