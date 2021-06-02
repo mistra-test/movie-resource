@@ -36,12 +36,12 @@ jobs:
 
       - name: Push to Docker
         run: docker push skullgnammer/movie-resource:latest
-    
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-          
-      - name: get linode kubernetes config
-        uses: mavieth/linode-authenticator@master
+
+      - name: Kubernetes set context
+        uses: Azure/k8s-set-context@v1
         with:
-          LINODE_TOKEN: ${{ secrets.LINODE_TOKEN }}
+          method: kubeconfig
+          kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
+
+      - name: Deploy to Kubernetes
+        run: kubectl apply -f deployment-config.yaml
