@@ -1,7 +1,4 @@
 spring:
-  sql:
-    init:
-      enabled: true
   application:
     name: movie-resource
   datasource:
