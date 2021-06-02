@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -46,14 +45,7 @@ public class MovieController {
 
     @GetMapping()
     public MovieListWrapper findAll() {
-        return new MovieListWrapper(
-                movieService.findAll().stream()
-                        .map(
-                                s -> {
-                                    s.setName(s.getName() + " sooos");
-                                    return s;
-                                })
-                        .collect(Collectors.toList()));
+        return new MovieListWrapper(movieService.findAll());
     }
 
     @PostMapping()
