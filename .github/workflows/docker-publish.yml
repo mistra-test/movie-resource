@@ -44,4 +44,6 @@ jobs:
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
 
       - name: Deploy to Kubernetes
-        run: kubectl rollout restart deployment/movie-resource-deployment
+        run: |
+          kubectl apply -f deployment-config.yaml
+          kubectl rollout restart deployment/movie-resource-deployment
