@@ -21,8 +21,11 @@ spec:
         ports:
         - containerPort: 8781
         resources:
+          requests:
+            cpu: "100m"
+            memory: "100"
           limits:
-            cpu: "1"
+            cpu: "800m"
             memory: "200Mi"
 ---
 apiVersion: v1
