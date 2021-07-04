@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import reactor.core.publisher.Flux;
 
 @SpringBootTest
 class MovieResourceTests {
@@ -30,10 +28,8 @@ class MovieResourceTests {
         var lotr = new Movie(1L, "Lord of the rings", "Frodo and Sam are on holiday");
         var ironMan = new Movie(2L, "Iron Man", "W Tony Stark");
 
-        List<Movie> result = Stream.of(lotr, ironMan).collect(Collectors.toList());
+        Mockito.when(repo.findAll()).thenReturn(Flux.just(lotr, ironMan));
 
-        Mockito.when(repo.findAll()).thenReturn(result);
-
-        assertTrue(movieService.findAll().containsAll(result));
+        assertTrue(movieService.findAll().collectList().block().contains(lotr));
     }
 }
